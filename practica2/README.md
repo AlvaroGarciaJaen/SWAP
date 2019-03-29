@@ -7,7 +7,7 @@ Para completar esta práctica, debemos llevar a cabo las siguientes tareas:
 - Establecer tareas en cron 
 
 ## Configurar ssh para acceder a máquinas remotas sin contraseña
-Cambiaremos un poco el orden. En primer lugar configuraremos ssh para acceder a las máquinas sin contraseña. El motivo es simple: de esta manera trabajaremos de manera mucha más rápida y eficiente. Para ello haremos tal y como dice el guión, ejecutaremos la siguiente orden para generar una clave RSA: 
+Cambiaremos un poco el orden. En primer lugar configuraremos ssh para acceder a las máquinas sin contraseña. El motivo es simple: de esta manera trabajaremos de manera mucha más rápida y eficiente. Para ello haremos tal y como dice el guión, ejecutaremos la siguiente orden para generar una clave RSA:  
 *ssh-keygen -b 4096 -t rsa*
 Con *-b* indicamos de cuantos bits será la clave (por defecto usa 2048) y con *-t* el tipo de clave (por defecto ya utiliza RSA).
 Una vez hecho esto, tendremos que añadir la clave como autorizada a la máquina a la cual queremos acceder por clave pública. Esto podría hacerse a mano escribiendo nuestra clave pública en *swap0x:.ssh/authorized_keys*, pero contamos con una herramienta que lo hace directamente por nosotros. Ejecutaremos lo siguiente:
