@@ -7,13 +7,13 @@ Para completar esta práctica, debemos llevar a cabo las siguientes tareas:
 - Establecer tareas en cron 
 
 ## Configurar ssh para acceder a máquinas remotas sin contraseña
-Cambiaremos un poco el orden. En primer lugar configuraremos ssh para acceder a las máquinas sin contraseña. El motivo es simple: de esta manera trabajaremos de manera mucha más rápida y eficiente. Para ello haremos tal y como dice el guión, ejecutaremos la siguiente orden para generar una clave RSA:  
+Cambiaremos un poco el orden. En primer lugar configuraremos ssh para acceder a las máquinas sin contraseña. El motivo es simple: de esta manera trabajaremos de manera mucho más rápida y eficiente. Para ello haremos tal y como dice el guión, ejecutaremos la siguiente orden para generar una clave RSA:  
 *ssh-keygen -b 4096 -t rsa*  
 Con *-b* indicamos de cuantos bits será la clave (por defecto usa 2048) y con *-t* el tipo de clave (por defecto ya utiliza RSA). 
 Una vez hecho esto, tendremos que añadir la clave como autorizada a la máquina a la cual queremos acceder por clave pública. Esto podría hacerse a mano escribiendo nuestra clave pública en *swap0x:.ssh/authorized_keys*, pero contamos con una herramienta que lo hace directamente por nosotros. Ejecutaremos lo siguiente:  
 *ssh-copy-id swap0x*  
 Al hacer este paso hay que tener en cuenta el usuario con el que nos conectamos, ya que será en esa cuenta a la que podremos conectarnos directamente mediante clave pública. También es posible que tengamos algún problema con los permisos. Si pasara basta con dejar la clave privada con los bits de permisos a 600 (solo lectura por el dueño, nosotros). Recordar que en la práctica 1 ya modificamos el servicio *sshd* para poder logearnos como root. Esto es indispensable si queremos inicar sesión como tal o usar cualquier servicio que use ssh por debajo.  
-Una vez hecho todo esto en todas los pares de máquinas (obviamente solo necesitamos generar un par de claves por máquina) ya podremos movernos libremente de una máquina a otro y usar cualquier servicio que use ssh (scp, rsync con ssh...) sin necesidad de contraseña.  
+Una vez hecho todo esto en todos los pares de máquinas (obviamente solo necesitamos generar un par de claves por máquina) ya podremos movernos libremente de una máquina a otro y usar cualquier servicio que use ssh (scp, rsync con ssh...) sin necesidad de contraseña.  
 
 ## Copiar archivos por ssh
 Para copiar archivos por ssh es muy sencillo. Hay varios métodos pero realizaremos el que se explica en el guión. Además, nos servirá para comprobar que efectivamente podemos copiar archivos sin contraseña. Haremos lo siguiente:  
