@@ -89,9 +89,9 @@ ssl_certificate_key     /etc/nginx/ssl/apache.crt
 ```
 Nos quedaría algo asi:
 ![alt text](img/nginx-ssl-conf.png)
-Observamos que no hemos tocado la linea _listen 80;_. Esto es muy importante, ya
-que si la quitamos dejariamos de escuchar en el puerto 80 (http) y solo
-escucharíamos en el 443 (https), y no queremos eso.  
+Observamos que ahora tenemos dos bloques _server_. Uno escucha las peticiones
+https y las pasa a los servidores finales tambien por https. El otro escucha
+peticiones http que devuelve un 301 (nos redirige a https).
 
 Si hacemos una petición, podemos ver que funciona:
 ![alt text](img/ssl-working-nginx.png)
