@@ -13,10 +13,10 @@ todas nuestras máquinas. Repasemos cuales son:
 
 Para generar el certificado ejecutaremos lo siguiente:
 ```bash
-a2enmod ssl     # Activamos el módulo _ssl_ de apache
-mkdir /etc/apache2/ssl      # Creamos un directorio para almacenar el certificado
+a2enmod ssl # Activamos el módulo _ssl_ de apache
+mkdir /etc/apache2/ssl  # Creamos un directorio para almacenar el certificado
 openssl req -x509 -nodes -days 365 -newkey rsa:20480 \
--keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt        # Generamos el par de certificado y llave
+-keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt  # Generamos el par de certificado y llave
 ```
 ![alt text](img/crear.png)
 Cuando lo ejecutamos nos pedirá una serie de datos. En mi caso los he rellenado
@@ -58,7 +58,8 @@ Obtenemos la siguiente salida:
 
 Ya tenemos configurado en _swap01_ https. Pero esto es una granja web, debemos
 de configurarlo en todos los servidores finales (además de en el balanceador de
-carga). 
+carga).  
+
 Para tener https funcionando también en _swap02_, basta con realizar los mismos
 pasos... pero, ¡RECUERDA!: usamos el mismo certificado que ya hemos creado.
 Podemos copiarlo de un servidor a otro por ejemplo mediante _scp_ desde _swap01_:
@@ -71,7 +72,8 @@ https funcionando:
 
 ### Nginx
 Una vez que tenemos los servidores finales con https, tenemos que configurar
-Nginx para que sepa como balancear este tipo de tráfico. 
+Nginx para que sepa como balancear este tipo de tráfico.  
+
 Lo primero es volver a mover el certificado que ya generamos anteriormente a
 _swap03_. Para ello:
 ```bash
@@ -89,7 +91,8 @@ Nos quedaría algo asi:
 ![alt text](img/nginx-ssl-conf.png)
 Observamos que no hemos tocado la linea _listen 80;_. Esto es muy importante, ya
 que si la quitamos dejariamos de escuchar en el puerto 80 (http) y solo
-escucharíamos en el 443 (https), y no queremos eso. 
+escucharíamos en el 443 (https), y no queremos eso.  
+
 Si hacemos una petición, podemos ver que funciona:
 ![alt text](img/ssl-working-nginx.png)
 Y además, como hemos dicho antes, al no haber quitado que escuche en el puerto
@@ -105,11 +108,11 @@ conecten desde el puerto 80 o el puerto 443. Nosotros para las prácticas vamos 
 permitir también las conexiones al puerto 22 (ssh) para poder configurar el
 servidor, pero en un entorno real solo se aconseja permitir este tipo de
 conexiones desde redes (interfaces para _iptables_) muy seguras a la que solo tu
-tienes acceso. 
+tienes acceso.  
+
 Para esta parte de la práctica he hecho dos scripts. El primero permite solo el
 tráfico que nos interesa en un servidor web, lo que hemos comentado antes. El
 segundo lo permite todo.
-[aqui los dos scripts]
 ```bash
 #!/bin/bash
 # web-mode.sh
@@ -130,8 +133,7 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
 # Permite entrada y salida de tráfico ssh, http y https (o los servicios que
-corran en esos puertos en
-# nuestro servidor) únicamente en la interfaz enp0s8
+# corran en esos puertos en nuestro servidor) únicamente en la interfaz enp0s8
 iptables -A INPUT -i enp0s8 -p tcp -m multiport --dports 22,80,443 -m state \
 --state NEW,ESTABLISHED -j ACCEPT
 iptables -A OUTPUT -o enp0s8 -p tcp -m multiport --sports 22,80,443 -m state \
@@ -179,12 +181,14 @@ llamadas ya implementadas que nos serán muy útiles:
 -   systemctl _start_ <servicio>    # Inicia un servicio
 -   systemctl _stop_ <servicio>     # Detener un servicio
 -   systemctl _enable_ <servicio>   # Habilita un servicio para que inicie con
-    el sistema.
+    el sistema.  
+
 Lo interesante viene cuando a un servicio de _systemd_ podemos indicarle que
 script ejecutar para iniciar el servicio y que script ejecutar para pararlo. Es
 por eso que creamos dos scripts: uno que permite el tráfico específico para un
 servidor web (equivaldrá a iniciar el servicio) y uno que lo permite tood
-(equivaldrá a detener el servicio).
+(equivaldrá a detener el servicio).  
+
 Una vez que sabemos la teoría, quedaría instalar el servicio. Es muy fácil, solo
 debemos crear el archivo _/etc/systemd/system/iptables-web.service_ y añadirle
 el siguiente contenido:
