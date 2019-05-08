@@ -178,15 +178,15 @@ configuración de _iptables_ no es persistente). Una de las maneras de hacerlo
 (para mí la mejor) es creando un servicio de _systemd_ para así poder manejarlo
 como tal con _systemctl_. ¿Por qué utilizar esto? Pues porque _systemctl_ tiene
 llamadas ya implementadas que nos serán muy útiles:
--   systemctl _start_ <servicio>    # Inicia un servicio
--   systemctl _stop_ <servicio>     # Detener un servicio
--   systemctl _enable_ <servicio>   # Habilita un servicio para que inicie con
+-   systemctl _start_ \<servicio\>    # Inicia un servicio
+-   systemctl _stop_ \<servicio\>     # Detener un servicio
+-   systemctl _enable_ \<servicio\>   # Habilita un servicio para que inicie con
     el sistema.  
 
 Lo interesante viene cuando a un servicio de _systemd_ podemos indicarle que
 script ejecutar para iniciar el servicio y que script ejecutar para pararlo. Es
 por eso que creamos dos scripts: uno que permite el tráfico específico para un
-servidor web (equivaldrá a iniciar el servicio) y uno que lo permite tood
+servidor web (equivaldrá a iniciar el servicio) y uno que lo permite todo
 (equivaldrá a detener el servicio).  
 
 Una vez que sabemos la teoría, quedaría instalar el servicio. Es muy fácil, solo
