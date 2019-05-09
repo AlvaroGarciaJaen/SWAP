@@ -1,4 +1,4 @@
-# Práctica 3. Asegurar la granja web
+# Práctica 4. Asegurar la granja web
 
 Para completar esta práctica, debemos llevar a cabo las siguientes tareas:
 -   Instalar un certificado SSL para configurar el acceso HTTPS a los servidores
@@ -61,7 +61,7 @@ de configurarlo en todos los servidores finales (además de en el balanceador de
 carga).  
 
 Para tener https funcionando también en _swap02_, basta con realizar los mismos
-pasos... pero, ¡RECUERDA!: usamos el mismo certificado que ya hemos creado.
+pasos... pero, RECUERDA, usamos el mismo certificado que ya hemos creado.
 Podemos copiarlo de un servidor a otro por ejemplo mediante _scp_ desde _swap01_:
 ```bash
 scp -r /etc/apache2/ssl swap02:/etc/apache2/
@@ -107,7 +107,7 @@ estamos tratando con páginas web, por lo que unicamente nos interesa que se nos
 conecten desde el puerto 80 o el puerto 443. Nosotros para las prácticas vamos a
 permitir también las conexiones al puerto 22 (ssh) para poder configurar el
 servidor, pero en un entorno real solo se aconseja permitir este tipo de
-conexiones desde redes (interfaces para _iptables_) muy seguras a la que solo tu
+conexiones desde redes (interfaces para _iptables_) muy seguras a la que solo tú
 tienes acceso.  
 
 Para esta parte de la práctica he hecho dos scripts. El primero permite solo el
