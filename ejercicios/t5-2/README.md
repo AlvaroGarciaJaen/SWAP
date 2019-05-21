@@ -1,6 +1,8 @@
 Instalar Wireshark y observar cómo fluye el tráfico de red en uno de los
 servidores web mientras se le hacen peticiones HTTP... o en la red de casa.
 
+# Solución
+
 Para este ejercicio he decidido poner _wireshark_ a leer el tráfico mientras
 accedia con el portatil a una página web. Es recomendable hacerlo en una que no
 utilice HTTPS (sino HTTP) para poder ver bien que está pasando.  

@@ -1,6 +1,8 @@
 Calcular la disponibilidad del sistema si tenemos dos réplicas de cada elemento
 (en total 3 elementos en cada subsistema).
 
+# Solución
+
 Componente - Disponibilidad
 Web - 85%
 Aplicación - 90%

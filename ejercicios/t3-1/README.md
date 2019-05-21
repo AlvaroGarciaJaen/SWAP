@@ -2,7 +2,9 @@ Buscar con qué órdenes de terminal o herramientas podemos configurar bajo
 Windows y bajo Linux el enrutamiento del tráfico de un servidor para pasar el
 tráfico desde una subred a otra.o
 
-# Linux
+# Solución
+
+## Linux
 Para hacerlo en Linux podemos hacerlo mediante la herramienta _ip_. Ejecutando
 lo siguiente
 ```bash
@@ -18,7 +20,7 @@ ip route add 192.168.1.0/24 dev eth0
 Esto por ejemplo enrutaría el tráfico hacia la red 192.168.1.0/24 mediante la
 interfaz _eth0_.
 
-# Windows
+## Windows
 En Windows también es bastante sencillo. Abrimos una terminal y escribimos lo
 siguiente:
 ```
